@@ -1,0 +1,70 @@
+package 백준;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class 연산자끼워넣기 {
+	static int n;
+	static int array[];
+	static int num_list[];
+	static int cal_list[];
+	static int max;
+	static int min;
+	static int ans;
+
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		max = -100000000;
+		min = 100000000;
+		n = Integer.parseInt(br.readLine());
+		array = new int[n];
+		num_list = new int[n+1];
+		cal_list = new int[5];
+
+		st = new StringTokenizer(br.readLine());
+		for(int i = 1;i<=n;i++) {
+			num_list[i] = Integer.parseInt(st.nextToken());
+		}
+		st = new StringTokenizer(br.readLine());
+		for(int i = 1;i<=4;i++) {
+			cal_list[i] = Integer.parseInt(st.nextToken());
+		}
+	
+		dfs(1);
+
+		System.out.println(max);
+		System.out.println(min);
+	}
+
+	static void dfs(int x) {
+		if(x==n) {
+			ans = num_list[1];
+			for(int i = 1;i<=n-1;i++) {
+				if(array[i]==1) ans = ans+num_list[i+1];
+				if(array[i]==2) ans = ans-num_list[i+1];
+				if(array[i]==3) ans = ans*num_list[i+1];
+				if(array[i]==4) ans = ans/num_list[i+1];
+			}
+			if(ans>max) max = ans;
+			if(ans<min) min = ans;
+
+			return;
+		}
+		for(int i = 1;i<=4;i++) {
+			if(cal_list[i]>0) {
+				array[x] = i;
+				cal_list[i]--;
+				dfs(x+1);
+				cal_list[i]++;
+				array[x] = 0;
+
+			}
+		}
+	}
+}

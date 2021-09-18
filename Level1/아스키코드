@@ -1,0 +1,16 @@
+package 백준;
+
+import java.util.Scanner;
+
+public class 아스키코드 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc = new Scanner(System.in);
+		String c = sc.next();
+		int c1 = c.charAt(0);
+		System.out.println(c1);
+	}
+
+}

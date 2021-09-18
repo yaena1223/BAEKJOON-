@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class nqueen {
+
+	   static StringBuilder sb;
+	   static int n;
+	   static int ans;
+	   static int array[];
+	   public static void main(String[] args) throws IOException {
+	      // TODO Auto-generated method stub
+	      
+	      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	      n = Integer.parseInt(br.readLine());
+	      ans = 0;
+	      array = new int[n+1];
+	      dfs(1);
+	      System.out.println(ans);
+	} 
+	  
+	   static void dfs(int x) { //x번째 줄일때 y의 위치를 결정
+		  
+		   if(x==n+1) {
+			   ans++;
+			   return;
+		   }
+		   for(int i = 1;i<=n;i++) { //y의 위치
+			   boolean pos = true;
+			   for(int j = 1;j<x;j++) { //x이전의 줄들
+				   if(i==array[j]) pos = false;
+				   if(j+array[j]==x+i) pos = false;
+				   if(j-array[j]==x-i) pos = false;
+
+			   }
+			   if(pos) {
+				   array[x] = i;
+				   dfs(x+1);
+				   array[x] = 0;
+			   }
+		   }
+		   
+	   }
+}

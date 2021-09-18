@@ -1,0 +1,23 @@
+package 백준;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class 단어의개수 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String s = br.readLine();
+		int ans = 0;
+		for(int i = 0;i<s.length();i++) {
+			if(s.charAt(i)==' ')ans++;
+		}
+		if(s.charAt(0)==' '&&s.charAt(s.length()-1)==' ') ans--;
+		if(s.charAt(0)!=' '&&s.charAt(s.length()-1)!=' ') ans++;
+		System.out.println(ans);
+	}
+
+}

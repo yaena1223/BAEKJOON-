@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class 상수 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		String a = st.nextToken();
+		String b = st.nextToken();
+		String n = "";
+		String n2="";
+		int num = 0;
+		int num2=0;
+		for(int i = 2;i>=0;i--) {
+			String s = a.substring(i,i+1);
+			n = n+s;
+			num = Integer.parseInt(n);
+			String s2 = b.substring(i,i+1);
+			n2=n2+s2;
+			num2=Integer.parseInt(n2);
+		}
+	
+		if(num>num2) System.out.println(num);
+		else System.out.println(num2);
+	}
+
+}

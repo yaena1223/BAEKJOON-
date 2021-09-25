@@ -1,0 +1,67 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class 마인크래프트 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		int [][] array = new int[n][m];
+		int max = -1;
+		int min = Integer.MAX_VALUE;
+		for(int i = 0;i<n;i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j = 0;j<m;j++) {
+				int num = Integer.parseInt(st.nextToken());
+				array[i][j] = num;
+				if(num>max) max = num;
+				if(num<min) min = num;
+			}
+		}
+		
+		int a = 0;
+		int ans_s=10000000;
+		int ans_h = -1;
+
+		for(int z = min;z<=max;z++) {
+			int sec = 0;
+			int left = b;
+			for(int i = 0 ;i<n;i++) {
+				for(int j =0;j<m;j++) {
+					a = array[i][j] - z;
+					if(a>0) {
+						sec = sec + Math.abs(a)*2;
+						left = left+Math.abs(a);
+					}
+					else if(a<0) {
+						sec = sec+Math.abs(a);
+						left= left-Math.abs(a);
+					}
+					
+				}
+				
+			}
+
+			if(left>=0) {
+				if(sec<ans_s) {
+					ans_s = sec;
+					ans_h = z;
+					
+				}
+				
+			}
+		}
+		System.out.print(ans_s+" ");
+		System.out.println(ans_h);
+
+	}
+
+}

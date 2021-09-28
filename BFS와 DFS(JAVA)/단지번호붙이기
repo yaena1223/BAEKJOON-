@@ -1,0 +1,66 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class 단지번호붙이기 {
+	static boolean visited[][];
+	static int array[][];
+	static int dx[] = {1,-1,0,0};
+	static int dy[] = {0,0,-1,1};
+	static int n;
+	static int cnt;
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		n = Integer.parseInt(br.readLine());
+		array = new int[n][n];
+		visited=  new boolean[n][n];
+		for(int i = 0;i<n;i++) {
+			String s = br.readLine();
+			for(int j = 0;j<n;j++) {
+				int x = Integer.parseInt(s.substring(j,j+1));
+				array[i][j] = x;
+			}
+		}
+		int ans = 0;
+		ArrayList<Integer>ans_list = new ArrayList<>();
+		for(int i = 0;i<n;i++) {
+			for(int j = 0;j<n;j++) {
+				if(array[i][j]==1&&!visited[i][j]) {
+					cnt = 0;
+					dfs(i,j);
+					ans_list.add(cnt);
+					ans++;
+				}
+			}
+		}
+		System.out.println(ans);
+		Collections.sort(ans_list);
+		for(int i = 0;i<ans_list.size();i++) {
+			System.out.println(ans_list.get(i));
+		}
+	}
+	static void dfs(int x, int y) {
+		visited[x][y] = true;
+		cnt++;
+		for(int i = 0;i<4;i++) {
+			int new_x = x+dx[i];
+			int new_y = y+dy[i];
+			
+			if(new_x<0||new_y<0||new_x>=n||new_y>=n)continue;
+			if(array[new_x][new_y]==0)continue;
+			if(visited[new_x][new_y])continue;
+			
+			dfs(new_x,new_y);
+				
+			
+			
+			
+		}
+	}
+
+}

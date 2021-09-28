@@ -1,0 +1,58 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class 나이트의이동 {
+
+	static int dx[]= {1,2,2,1,-1,-2,-2,-1};
+	static int dy[]= {2,1,-1,-2,2,1,-1,-2};
+   public static void main(String[] args) throws IOException {
+	      // TODO Auto-generated method stub
+
+	      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	      StringTokenizer st;
+	      StringBuilder sb = new StringBuilder();
+	      int n = Integer.parseInt(br.readLine());
+	      boolean visited[][];
+	      Queue<Integer[]>queue = new LinkedList();
+	      int dist[][];
+	      for(int j = 0;j<n;j++) {
+	    	  int l = Integer.parseInt(br.readLine());
+		      st = new StringTokenizer(br.readLine());
+		      int start_x = Integer.parseInt(st.nextToken());
+		      int start_y = Integer.parseInt(st.nextToken());
+		      st = new StringTokenizer(br.readLine());
+		      int end_x = Integer.parseInt(st.nextToken());
+		      int end_y = Integer.parseInt(st.nextToken()); 
+		     
+		      visited = new boolean[l][l];
+		      queue.offer(new Integer[] {start_x,start_y});
+		      visited[start_x][start_y] = true;
+	    	  dist = new int[l][l];
+		      while(!queue.isEmpty()) {
+		    	  int x = queue.peek()[0];
+		    	  int y = queue.peek()[1];
+		    	  queue.poll();
+		    	  for(int i = 0;i<8;i++) {
+		    		  int new_x = x + dx[i];
+		    		  int new_y = y+ dy[i];
+		    		  if(new_x<0 ||new_y<0 ||new_x>=l ||new_y>=l)continue;
+		    		  if(!visited[new_x][new_y]) {
+		    			  dist[new_x][new_y] = dist[x][y]+1;
+		    			  visited[new_x][new_y]=true;
+		    			  queue.offer(new Integer []{new_x,new_y});
+		    			  
+		    		  }
+		    	  }
+		      }
+	      sb.append(dist[end_x][end_y]+"\n");
+	      }
+	      System.out.println(sb.toString());
+	     
+	}
+
+}
